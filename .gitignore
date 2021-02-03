@@ -1,0 +1,4 @@
+# Project exclude paths
+/node_modules/
+/server-express-prime-react.iml
+/.idea/
