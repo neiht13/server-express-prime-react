@@ -1,10 +1,10 @@
 var express = require('express');
 var moment = require('moment');
 var app = express();
-// var port = process.env.PORT || 3000
-// app.listen(5000, function () {
-//   console.log('Server is running...'+ port);
-// });
+var port = process.env.PORT || 5050
+app.listen(port, function () {
+  console.log('Server is running...'+ port);
+});
 app.use(express.json())
 app.use(function(req, res, next) {
   res.header("Content-Type", "application/json");
