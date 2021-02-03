@@ -1,11 +1,15 @@
 var express = require('express');
 var moment = require('moment');
+var cors = require('cors');
 var app = express();
 var port = process.env.PORT || 5050
+
 app.listen(port, function () {
   console.log('Server is running...'+ port);
 });
-app.use(express.json())
+app.use(express.json());
+app.use(cors);
+
 app.use(function(req, res, next) {
   res.header("Content-Type", "application/json");
   res.header("Access-Control-Allow-Origin", "*");
