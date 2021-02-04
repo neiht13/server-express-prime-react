@@ -2,3 +2,4 @@
 /node_modules/
 /server-express-prime-react.iml
 /.idea/
+/package-lock.json
