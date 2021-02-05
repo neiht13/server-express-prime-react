@@ -1,10 +1,15 @@
 var express = require('express');
 var moment = require('moment');
+var pgp = require('pg-promise')();
 var app = express();
-var port = process.env.PORT || 5050
+var port = process.env.PORT || 5000
 app.listen(port, function () {
   console.log('Server is running...'+ port);
 });
+
+var db;
+db = pgp(`postgres://postgres:1710@localhost:5432/react_prime_thien`);
+
 
 
 app.use(express.json())
@@ -17,9 +22,18 @@ app.use(function(req, res, next) {
   next();
 });
 
+function getData(sql, res){
+    db.any(sql).then(function (data) {
+        console.log('DATA:', data)
+        res.send(data);
+    })
+}
+
 app.get('/data', function (req, res) {
-  res.json({txt: 'Hello'})
-});
+        var sql = "select * from u_user";
+        getData(sql, res)
+    }
+);
 var mysql = require("mysql");
 
 var connection = mysql.createConnection({
@@ -36,11 +50,8 @@ var pool  = mysql.createPool({
   database: "angular"
 });
 app.get('/employee', function (req, res) {
-  pool.query('select * from employee', function (err, recordset) {
-      if (err) console.log(err)
-      res.send(recordset);
-
-    });
+    var sql = "select * from employee";
+    getData(sql, res)
 });
 app.get('/employee/:id', function (req, res) {
     pool.query('select * from employee where id = ' + req.params.id, function (err, recordset) {
